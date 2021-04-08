@@ -11,7 +11,10 @@ function TodoItem( {item} ) {
   
   return (
     <label className={`panel-block ${clicked ? 'has-text-grey-light' : ''}`} >
-    <input type="checkbox" onClick={()=>{setClicked(!clicked)}}/>
+    <input type="checkbox" onClick={()=>{
+    setClicked(!clicked);
+    item.done=!clicked;
+    }}/>
     {item.text}
     </label>
   );
