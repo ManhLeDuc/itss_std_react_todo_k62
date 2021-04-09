@@ -10,8 +10,8 @@ function TodoItem( {item} ) {
   const [clicked, setClicked] = useState(false);
   
   return (
-    <label className={`panel-block ${clicked ? 'has-text-grey-light' : ''}`} >
-    <input type="checkbox" onClick={()=>{
+    <label className={`panel-block ${item.done ? 'has-text-grey-light' : ''}`} >
+    <input type="checkbox" defaultChecked={item.done} onClick={()=>{
     setClicked(!clicked);
     item.done=!clicked;
     }}/>

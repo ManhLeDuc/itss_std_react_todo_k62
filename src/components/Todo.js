@@ -19,6 +19,7 @@ import useStorage from "../hooks/storage";
 import { getKey } from "../lib/util";
 
 function Todo() {
+  
   const [items, putItems] = React.useState([
     /* テストコード 開始 */
     { key: getKey(), text: "日本語の宿題", done: false },
@@ -27,12 +28,19 @@ function Todo() {
     /* テストコード 終了 */
   ]);
   
-  function toggle(index) {
-    if(index == 1){
-      putItems(items.filter(item=>item.done==false))
+  const [filter, toggle] = React.useState(0);
+  
+  const displayItems = items.filter((item)=>{
+    if(filter == 0){
+      return true;
     }
-    
-  }
+    else if (filter == 1){
+      return !item.done;
+    }
+    else if (filter == 2){
+      return item.done;
+    }
+  })
 
   return (
     <div className="panel">
@@ -41,10 +49,10 @@ function Todo() {
         <Filter toggle={toggle}/>
       </div>
       <Input items={items} putItems={putItems}/>
-      {items.map((item) => (
+      {displayItems.map((item) => (
         <TodoItem key={item.key} item={item} />
       ))}
-      <div className="panel-block">{items.length} items</div>
+      <div className="panel-block">{displayItems.length} items</div>
       
     </div>
     
